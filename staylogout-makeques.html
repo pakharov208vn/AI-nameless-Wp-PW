@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main-AI.css">
+    <title>Make questions with log-out sittuation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url('https://icdn.dantri.com.vn/dansinh/2024/07/16/hero-1721106115487.png');
+            width: 100vw;
+            min-height: 100vh;
+        }
+
+        .main {
+            min-width: 500px;
+            min-height: 300px;
+            border-radius: 5px;
+            background-color: wheat;
+            position: relative;
+            font: message-box ;
+            display: block;
+            text-align: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 10px auto;
+            font: message-box;
+            color: black;
+            font-size: 30px;
+        }
+
+        .color-choices   {
+            height: 50px;
+            width: 100px;
+            border-radius: 5px;
+            position: relative ;
+            left: 30px;
+            right: 30px;
+            margin: 5px;   
+            font: message-box;
+            font-size: 15px;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-items: center;
+            justify-content: center;
+            float: left;
+            color: black;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .color-choices.active {
+            width: calc(100% - 70px); /* 70px accounts for left margin + right margin */
+        }
+
+        .red {
+            background-color: red;
+        }
+        .green {
+            background-color: green;
+        }
+        .blue {
+            background-color: blue;
+        }
+        .yellow {
+            background-color: yellow;
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .tool {
+            width: 100px;
+            height: 40px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            visibility: hidden;
+            margin: 5px;
+        }
+
+        .tools-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 10px auto;
+        }
+
+        .addQuestion {
+            background-color: rgb(15, 146, 15);
+        }
+        .submitQuestion {
+            background-color: cadetblue;
+        }
+
+        .question {
+            position: relative;
+            margin-bottom: 10px;
+            display: flex;
+            font: medium;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .questionsContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .answer-input {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .true-false-answers {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .true-false-btn {
+            padding: 5px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            background: white;
+        }
+
+        .true-false-btn.selected {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .reset-button {
+            border-radius: 5px;
+            font: message-box;
+            font-size: 15px;
+            background-color: #ff6b6b;
+            color: white;
+            
+            visibility: hidden;
+            position: relative;
+            transition: opacity 0.5s;
+        }
+
+        .next-section {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+
+        .next-section h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .next-section select {
+            padding: 5px;
+            font-size: 16px;
+            width: 200px;
+        }
+
+        .section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .add-section-btn {
+            margin: 20px;
+            width: calc(100% - 45px);
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: none;
+        }
+
+        .add-section-btn:hover {
+            background-color: #45a049;
+        }
+
+        .short-answer-question {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px;
+        }
+
+        .short-answer-input {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .answer-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .answer-option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .answer-option input[type="text"] {
+            flex-grow: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div id="section1" class="section active">
+            <h2 style="font-size: 30px;">Chọn dạng câu hỏi <br> phần 1</h2>
+            <div>
+                <div class="color-choices red" data-section="1">Trắc nghiệm 4 câu</div>
+                <div class="color-choices green" data-section="1">Trắc nghiệm đúng sai</div>
+                <div class="color-choices blue" data-section="1">Trả lời ngắn</div>
+                <div class="color-choices yellow" data-section="1">Tự luận</div>
+            </div>
+        <textarea type="text" placeholder="Nhập câu hỏi:" id="red1" style="background-color:cornflowerblue; visibility: hidden; width: 400px; height: auto; font-size: 20px; margin-top: 15px; display: inline-block;"></textarea>
+        <div class="questionsContainer" id="questionsContainer1"></div>
+            <div class="tools-container">
+                <button class="tool submitQuestion" id="submitQuestion1"></button>
+                <button class="tool addQuestion" id="addQuestion1"></button>
+                <button class="tool reset-button" onclick="confirmReset(1)">Reset Choices</button>
+            </div>
+        </div>
+
+        <button class="add-section-btn" onclick="addNewSection()">Thêm phần mới</button>
+
+        <div class="next-section" id="nextSection">
+            <h3>Tiếp tục sang phần tiếp theo?</h3>
+            <button onclick="showNextSection()">Tiếp tục</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        const maxSections = 10;
+
+        function addNewSection() {
+            if (currentSection < maxSections) {
+                currentSection++;
+                createNewSection(currentSection);
+                document.getElementById(`section${currentSection}`).classList.add('active');
+            } else {
+                alert('Đã đạt số lượng phần tối đa!');
+            }
+        }
+
+        function confirmReset(section) {
+            if (confirm('Bạn có chắc chắn muốn reset không?')) {
+                resetChoices(section);
+                const resetButton = document.querySelector(`#section${section} .reset-button`);
+                resetButton.style.opacity = '0';
+                setTimeout(() => {
+                    resetButton.style.visibility = 'hidden';
+                    resetButton.style.opacity = '1';
+                }, 500);
+            }
+        }
+
+        function resetChoices(section) {
+            const sectionEl = document.getElementById(`section${section}`);
+            const choices = sectionEl.querySelectorAll('.color-choices');
+            choices.forEach(choice => {
+                choice.classList.remove('hidden');
+                choice.classList.remove('active');
+            });
+            document.getElementById(`addQuestion${section}`).style.visibility = 'hidden';
+            document.getElementById(`submitQuestion${section}`).style.visibility = 'hidden';
+            document.getElementById('nextSection').style.display = 'none';
+            document.querySelector('.add-section-btn').style.display = 'none';
+            resetQuestions(section);
+        }
+
+        function saveQuestions(section) {
+            const container = document.getElementById(`questionsContainer${section}`);
+            const questions = [];
+            
+            container.querySelectorAll('.question').forEach(questionDiv => {
+                const questionText = questionDiv.querySelector('.question-input').value;
+                const answers = Array.from(questionDiv.querySelectorAll('.answer-input')).map(input => input.value);
+                const correctAnswer = questionDiv.querySelector('input[type="radio"]:checked')?.value;
+                const selectedAnswer = questionDiv.querySelector('.true-false-btn.selected')?.textContent;
+                const shortAnswer = questionDiv.querySelector('.short-answer-input')?.value;
+                
+                questions.push({
+                    question: questionText,
+                    answers: answers,
+                    correctAnswer: correctAnswer,
+                    selectedAnswer: selectedAnswer,
+                    shortAnswer: shortAnswer,
+                    type: questionDiv.dataset.type
+                });
+            });
+            
+            localStorage.setItem(`savedQuestions${section}`, JSON.stringify(questions));
+        }
+
+        function createQuestionElement(section, questionData = null, type = 'multiple') {
+            const container = document.getElementById(`questionsContainer${section}`);
+            const questionDiv = createElement('div', { 
+                className: 'question',
+                dataset: { type: type }
+            });
+
+            const removeQuestion = createElement('button', {
+                style: 'position: relative; height: 15px; width: 15px; background-color: red;',
+                onclick: function() {
+                    questionDiv.remove();
+                    if (container.children.length === 0) {
+                        document.getElementById(`addQuestion${section}`).style.visibility = 'hidden';
+                        document.getElementById(`submitQuestion${section}`).style.visibility = 'hidden';
+                    }
+                    saveQuestions(section);
+                }
+            });
+
+            const questionInput = createElement('textarea', {
+                className: 'question-input',
+                placeholder: 'Nhập câu hỏi',
+                value: questionData ? questionData.question : ''
+            });
+
+            questionDiv.appendChild(removeQuestion);
+            questionDiv.appendChild(questionInput);
+
+            if (type === 'trueFalse') {
+                const answersDiv = createElement('div', { className: 'true-false-answers' });
+                ['Đúng', 'Sai'].forEach(value => {
+                    const btn = createElement('button', {
+                        className: 'true-false-btn',
+                        textContent: value
+                    });
+                    btn.onclick = () => {
+                        answersDiv.querySelectorAll('.true-false-btn').forEach(b => b.classList.remove('selected'));
+                        btn.classList.add('selected');
+                        saveQuestions(section);
+                    };
+                    answersDiv.appendChild(btn);
+                });
+                questionDiv.appendChild(answersDiv);
+            } else if (type === 'shortAnswer' || type === 'essay') {
+                const shortAnswerDiv = createElement('div', { className: 'short-answer-question' });
+                const answerInput = createElement('input', {
+                    type: 'text',
+                    className: 'short-answer-input',
+                    placeholder: 'Nhập đáp án',
+                    value: questionData ? questionData.shortAnswer : ''
+                });
+                shortAnswerDiv.appendChild(answerInput);
+                questionDiv.appendChild(shortAnswerDiv);
+            } else if (type === 'multiple') {
+                const answersDiv = createElement('div');
+                for (let i = 1; i <= 4; i++) {
+                    const answerOption = createElement('div', { className: 'answer-option' });
+                    
+                    const radio = createElement('input', {
+                        type: 'radio',
+                        name: `correct-answer-${questionDiv.id || Date.now()}`,
+                        value: i-1
+                    });
+                    
+                    const answerInput = createElement('input', {
+                        type: 'text',
+                        className: 'answer-input',
+                        placeholder: `Nhập đáp án ${i}`,
+                        value: questionData ? questionData.answers[i-1] || '' : ''
+                    });
+                    
+                    answerOption.appendChild(radio);
+                    answerOption.appendChild(answerInput);
+                    answersDiv.appendChild(answerOption);
+                }
+                questionDiv.appendChild(answersDiv);
+            }
+
+            container.appendChild(questionDiv);
+
+            // Add event listeners for saving
+            questionInput.addEventListener('input', () => saveQuestions(section));
+            questionDiv.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', () => saveQuestions(section));
+                input.addEventListener('change', () => saveQuestions(section));
+            });
+        }
+
+        function resetQuestions(section) {
+            document.getElementById(`questionsContainer${section}`).innerHTML = '';
+            document.getElementById(`addQuestion${section}`).style.visibility = 'hidden';
+            document.getElementById(`submitQuestion${section}`).style.visibility = 'hidden';
+            localStorage.removeItem(`savedQuestions${section}`);
+        }
+
+        function createNewSection(sectionNumber) {
+            const newSection = document.createElement('div');
+            newSection.id = `section${sectionNumber}`;
+            newSection.className = 'section';
+            newSection.innerHTML = `
+                <h2 style="font-size: 30px;">Chọn dạng câu hỏi <br> phần ${sectionNumber}</h2>
+                <div>
+                    <div class="color-choices red" data-section="${sectionNumber}">Trắc nghiệm 4 câu</div>
+                    <div class="color-choices green" data-section="${sectionNumber}">Trắc nghiệm đúng sai</div>
+                    <div class="color-choices blue" data-section="${sectionNumber}">Trả lời ngắn</div>
+                    <div class="color-choices yellow" data-section="${sectionNumber}">Tự luận</div>
+                </div>
+                <textarea type="text" placeholder="Nhập câu hỏi:" id="red${sectionNumber}" style="background-color:cornflowerblue; visibility: hidden; width: 400px; height: auto; font-size: 20px; margin-top: 15px; display: inline-block;"></textarea>
+                <div class="questionsContainer" id="questionsContainer${sectionNumber}"></div>
+                <div class="tools-container">
+                    <button class="tool submitQuestion" id="submitQuestion${sectionNumber}"></button>
+                    <button class="tool addQuestion" id="addQuestion${sectionNumber}"></button>
+                    <button class="reset-button" onclick="confirmReset(${sectionNumber})">Reset Choices</button>
+                </div>
+            `;
+            
+            document.querySelector('.main').insertBefore(newSection, document.querySelector('.add-section-btn'));
+            setupSectionEventListeners(sectionNumber);
+            document.querySelector('.add-section-btn').style.display = 'none';
+        }
+
+        function setupSectionEventListeners(section) {
+            const setupColorChoice = (colorClass) => {
+                document.querySelector(`#section${section} .${colorClass}`).addEventListener('click', function() {
+                    const sectionEl = document.getElementById(`section${section}`);
+                    const choices = sectionEl.querySelectorAll('.color-choices');
+                    
+                    // Remove active class from all choices first
+                    choices.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked choice
+                    this.classList.add('active');
+                    
+                    // Hide other choices
+                    choices.forEach(choice => {
+                        if (choice !== this) {
+                            choice.classList.add('hidden');
+                        }
+                    });
+
+                    document.getElementById(`addQuestion${section}`).style.visibility = 'visible';
+                    document.getElementById(`submitQuestion${section}`).style.visibility = 'visible';
+                    sectionEl.querySelector('.reset-button').style.visibility = 'visible';
+                    document.querySelector('.add-section-btn').style.display = 'block';
+                    
+                    const type = colorClass === 'red' ? 'multiple' : 
+                               colorClass === 'green' ? 'trueFalse' : 
+                               colorClass === 'blue' ? 'shortAnswer' :
+                               colorClass === 'yellow' ? 'essay' : null;
+                               
+                    if (type) {
+                        createQuestionElement(section, null, type);
+                    }
+                });
+            };
+
+            setupColorChoice('red');
+            setupColorChoice('green');
+            setupColorChoice('blue');
+            setupColorChoice('yellow');
+
+            document.getElementById(`addQuestion${section}`).addEventListener('click', function() {
+                const activeChoice = document.querySelector(`#section${section} .color-choices:not(.hidden)`);
+                let type = 'multiple';
+                if (activeChoice.classList.contains('green')) {
+                    type = 'trueFalse';
+                } else if (activeChoice.classList.contains('blue')) {
+                    type = 'shortAnswer';
+                } else if (activeChoice.classList.contains('yellow')) {
+                    type = 'essay';
+                }
+                createQuestionElement(section, null, type);
+            });
+        }
+
+        function createElement(tag, attributes) {
+            const element = document.createElement(tag);
+            for (const key in attributes) {
+                if (key === 'dataset') {
+                    for (const dataKey in attributes[key]) {
+                        element.dataset[dataKey] = attributes[key][dataKey];
+                    }
+                } else if (key === 'style') {
+                    element.style.cssText = attributes[key];
+                } else {
+                    element[key] = attributes[key];
+                }
+            }
+            return element;
+        }
+
+        // Initial setup for section 1
+        setupSectionEventListeners(1);
+
+        // Save questions periodically
+        setInterval(() => {
+            for (let i = 1; i <= currentSection; i++) {
+                saveQuestions(i);
+            }
+        }, 30000);
+
+        // Clear storage on page load
+        window.addEventListener('load', function() {
+            for (let i = 1; i <= maxSections; i++) {
+                localStorage.removeItem(`savedQuestions${i}`);
+                if (document.getElementById(`questionsContainer${i}`)) {
+                    document.getElementById(`questionsContainer${i}`).innerHTML = '';
+                }
+            }
+        });
+    </script>
+</body>
+</html>     
