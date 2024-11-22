@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="staylogout-AI.css">
+    <title>staylogout</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url('https://icdn.dantri.com.vn/dansinh/2024/07/16/hero-1721106115487.png');
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .main-box {
+            width: 450px;
+            height: 650px;
+            border-radius: 5px;
+            background-color: wheat;
+            position: relative;
+            font: message-box ;
+            display:block;
+            text-align: center;
+            justify-content: center;
+            font: message-box;
+            color: black;
+            font-size: 50px;
+        }
+
+        .invisible-box {
+            height: 400px;
+            width: 450px;
+            position: absolute;
+            display: block;
+            align-items:center;
+            justify-content: center;
+            margin-top: 300px;
+        }
+        
+        .box {
+            width: 400px;
+            height: 50px;
+            font-size: 25px;
+            display: flex;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 25px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+        }
+
+        .b1 {
+            background-image: linear-gradient(90deg, rgba(95, 158, 160, 1), rgba(0, 0, 0, 0.15));
+        }
+
+        .b2 {
+            background-image: linear-gradient(90deg, rgba(145, 42, 42, 1), rgba(0, 0, 0, 0.15));
+            margin-top: 70px;
+        }
+
+        .b3 {
+            background-image: linear-gradient(90deg, rgba(0, 0, 225, 1), rgba(0, 0, 0, 0.15));
+            margin-top: 140px;
+        }
+
+        .i1 {
+            position: absolute;
+            transform: translate(50px, 200px);
+        }
+        .rt-1 {
+            transform: rotate(30.5deg);
+        }
+
+        .i2 {
+            position: absolute;
+            transform: translate(300px, 500px);
+        }
+        .rt-2 {
+            transform: rotate(-60.5deg);
+        }
+
+        .i3 {
+            position: absolute;
+            transform: translate(70px, 475px);
+        }
+        .rt-3{
+            transform: rotate(90deg);
+        }
+
+        .i4 {
+            position: absolute;
+            transform: translate(330px, 180px);
+        }
+        .rt-4 {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-box"> <p style="position: absolute; top: 10%; left:25.5%">bạn là ai?</p>
+        <div class="icon i1"><img src="book-bookmark-minimalistic-svgrepo-com.svg" alt="" class="rt-1"></div>
+        <div class="icon i2"><img src="graduation-hat-alt-1-svgrepo-com.svg" alt="" class="rt-2"></div>
+        <div class="icon i3"><img src="pen-clip-svgrepo-com.svg" alt="" class="rt-3"></div>
+        <div class="icon i4"><img src="apple-4-svgrepo-com.svg" alt="" class="rt-4"></div>
+        <div class="invisible-box">
+            <div class="box b1" onclick="window.location.href='staylogout_AI.html'">học sinh</div>
+            <div class="box b2" onclick="window.location.href='staylogout-makeques.html'">giáo viên</div>
+            <div class="box b3">phụ huynh</div>
+        </div>
+    </div>
+    
+</body>
+</html>
