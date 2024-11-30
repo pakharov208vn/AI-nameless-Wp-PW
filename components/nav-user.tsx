@@ -12,15 +12,20 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar'
+import { useSession } from '@/providers/session-provider'
+import { signOut } from '@/server/auth'
+import { redirect } from 'next/navigation'
 
 export function NavUser() {
   const { isMobile } = useSidebar()
+  const { user } = useSession()
 
-  const user = {
-    name: 'Nguyễn Sơn Hà',
-    email: 'sonha@thpgcamlo.edu.vn',
-    avatar: '/avatars/sonha.jpg',
+  const handleSignOut = async () => {
+    await signOut()
+    redirect('/')
   }
+
+  if (!user) return null
 
   return (
     <SidebarMenu>
@@ -58,7 +63,7 @@ export function NavUser() {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleSignOut}>
               <LogOut />
               Đăng xuất
             </DropdownMenuItem>

@@ -1,8 +1,16 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from '@/components/ui/breadcrumb'
 import { Separator } from '@/components/ui/separator'
 import { SidebarTrigger } from '@/components/ui/sidebar'
+import { validateRequest } from '@/server/auth/lucia'
+import { redirect } from 'next/navigation'
 
-export default function Page() {
+export default async function Page() {
+  const { user } = await validateRequest()
+
+  if (!user) {
+    return redirect('/')
+  }
+
   return (
     <>
       <header className='flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12'>

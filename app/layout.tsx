@@ -1,4 +1,6 @@
 import { ThemeProvider } from '@/components/theme-provider'
+import { SessionProvider } from '@/providers/session-provider'
+import { validateRequest } from '@/server/auth/lucia'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
@@ -17,16 +19,18 @@ export const metadata: Metadata = {
   description: 'Hệ thống quản lý đề thi và đánh giá học sinh',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const sessionData = await validateRequest()
+
   return (
     <html lang='en'>
       <body className={`${geistSans.variable} antialiased`}>
         <ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
-          {children}
+          <SessionProvider value={sessionData}>{children}</SessionProvider>
         </ThemeProvider>
       </body>
     </html>
