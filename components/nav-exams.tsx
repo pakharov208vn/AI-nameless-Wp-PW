@@ -12,7 +12,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar'
-import { ChevronRight, SquareTerminal } from 'lucide-react'
+import { ChevronRight, Plus, SquareTerminal } from 'lucide-react'
 
 export function NavExams() {
   const exams = [
@@ -77,6 +77,13 @@ export function NavExams() {
             </SidebarMenuItem>
           </Collapsible>
         ))}
+
+        <SidebarMenuItem>
+          <SidebarMenuButton className='text-sidebar-foreground/70 border' tooltip='Tạo bài thi'>
+            <Plus />
+            <span>Tạo bài thi</span>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
   )

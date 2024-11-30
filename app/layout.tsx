@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@/components/theme-provider'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
@@ -9,8 +10,11 @@ const geistSans = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Teacher Assistant',
-  description: 'Teacher Assistant',
+  title: {
+    template: '%s | Examini',
+    default: 'Examini',
+  },
+  description: 'Hệ thống quản lý đề thi và đánh giá học sinh',
 }
 
 export default function RootLayout({
@@ -20,7 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${geistSans.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} antialiased`}>
+        <ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }

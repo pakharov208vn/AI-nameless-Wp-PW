@@ -7,18 +7,8 @@ import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, Sideba
 export function NavTools() {
   const classes = [
     {
-      name: 'Lớp 10A1',
-      url: '/classes/10a1',
-      icon: Book,
-    },
-    {
-      name: 'Lớp 10A2',
-      url: '/classes/10a2',
-      icon: Book,
-    },
-    {
-      name: 'Lớp 10A3',
-      url: '/classes/10a3',
+      name: 'Tạo đề thi',
+      url: '/exams/create',
       icon: Book,
     },
   ]
