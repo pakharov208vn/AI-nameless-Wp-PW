@@ -1,10 +1,10 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from '@/components/ui/breadcrumb'
 import { Separator } from '@/components/ui/separator'
-import { SidebarInset, SidebarTrigger } from '@/components/ui/sidebar'
+import { SidebarTrigger } from '@/components/ui/sidebar'
 
 export default function Page() {
   return (
-    <SidebarInset>
+    <>
       <header className='flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12'>
         <div className='flex items-center gap-2 px-4'>
           <SidebarTrigger className='-ml-1' />
@@ -12,11 +12,7 @@ export default function Page() {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem className='hidden md:block'>
-                <BreadcrumbLink href='#'>Building Your Application</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className='hidden md:block' />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                <BreadcrumbLink href='#'>Trang chủ</BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -30,6 +26,6 @@ export default function Page() {
         </div>
         <div className='min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min' />
       </div>
-    </SidebarInset>
+    </>
   )
 }
