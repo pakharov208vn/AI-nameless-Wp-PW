@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            AI - beta
+        </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="main-AI.css">
+        <style>
+            html, body{
+                margin: 0;
+                padding: 0;
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+            }
+
+            .mainbox {
+                width: 100% ;
+                height: 200vh ;
+                content: "";
+                position: relative;
+                background-color: #fff;
+            }
+            
+            .header {
+                width: 100%;
+                height: 60px;
+                background-color: rgb(26, 48, 48);
+                overflow-x: auto; /* Cho phép cuộn ngang */
+                overflow-y: hidden;
+                white-space: nowrap; /* Không ngắt dòng bên trong container */
+                position: fixed;
+                z-index: 2;
+            }
+
+            .header::-webkit-scrollbar {
+                display: none;
+            }
+
+            .open {
+                width: 300px;
+                height: 200px;
+                background-color: bisque;
+                z-index: 2;
+                display: none;
+                float: left;
+                position: absolute;
+                top: 65px;
+                border-radius: 5px;
+            }
+            
+            .hbox {
+                width: 200px;
+                height: 40px;
+                color: var(--main-htext-color);
+                display:inline-block;
+                background-color: var(--main-head-color) ;
+                content: "";
+                position: relative;
+                top: 5px;
+                font: message-box ;
+                transform: translateX(50%), translateY(50%);
+                line-height: 100px;
+                margin: 2.5px;
+                border-radius: 15px;
+            }
+
+            .hbox span {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%); 
+                text-align: center; 
+            }
+
+            .hbox:hover {
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            }
+
+            .titlebox {
+                width: 100%;
+                height: 600px;
+                background-image: url('https://www.boardworkseducation.com/wp-content/uploads/2021/10/education-technology.jpg');
+                background-size: 60%;
+                background-position: right;
+                position: relative;
+                display: flex;
+                justify-content: center; /* Căn giữa theo chiều ngang */
+                align-items: end; /* Căn giữa theo chiều dọc */
+            }
+
+            .eye-catching {
+                font: message-box;
+                font-size: 80px;
+                color: var(--main-htext-color);
+                flex-direction: column;
+                position: absolute;
+                top: 100px;
+                left: 50px;
+                z-index: 1;
+                opacity: 0;
+                transform: translateY(50px);
+                transition: opacity 1s ease-out, transform 1s ease-out;
+            }
+
+            .style-block {
+                position: absolute;
+                top: 100px;
+                width: 60%;
+                height: 600px;
+                background-color: rgb(50, 83, 83);
+                border-radius: 0 300px 300px 0;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+                z-index: 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .bbox {
+                width: 350px ;
+                height: 40px;
+                color: var(--main-htext-color);
+                background-color: var(--main-head-color) ;
+                z-index: 1;
+                font: message-box ;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 15px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+                margin: 80px 2.5px;
+                transition: transform 0.5s ease;
+                cursor: pointer;
+            }
+            .bbox:hover {
+                transform: translateY(-12px);
+            }
+
+            .b1:hover {
+                background-color: black;
+            }
+
+            .b2:hover {
+                background-color: cornflowerblue;
+            }
+
+            .b3:hover {
+                background-color: rgb(205, 200, 36);
+            }
+
+            .usable-bar {
+                width: 100%;
+                height: 50px;
+                position: absolute;
+                align-items: last baseline;
+                z-index: 0;
+                background-image: linear-gradient(0, rgba(0, 0, 0, 0.5), rgba(114, 108, 108, 0.2));   
+            }
+
+            .icon {
+                width: 40px;
+                height: 40px;
+                display: inline-block;
+                border-radius: 15px;
+                position: relatives;
+                margin: 5px;
+                transition: transform 0.5s ease;
+                transform: translateX(1560%) translateY(1%);
+            }
+
+            .i5 {
+                background-image: url('powerpoint-svgrepo-com.svg');
+                background-color: orange;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            .i4 {
+                background-image: url('record-square-svgrepo-com.svg');
+                background-color: orange;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            .i3 {
+                background-image: url('sound-loud-svgrepo-com.svg');
+                background-color: orange;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center; 
+            }
+
+            .i2 {
+                background-image: url('text-field-focus-svgrepo-com.svg');
+                background-color: orange;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            .i1 {
+                background-image: url('image-svgrepo-com.svg');
+                background-color: orange;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            .wbox {
+                width: 100%;
+                height: 100px;
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .arli {
+                width: 350px;
+                height:100px;
+                visibility: hidden;
+                color: #fff;
+                font: message-box;
+                background-color: cadetblue;
+                z-index: 0;
+                margin: 0px 2.5px ;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                float: left;
+            }
+
+            .arli span{
+                margin-bottom: 40px;
+            }
+
+            .adbox {
+                width: 400px;
+                height: 50px;
+                font: message-box;
+                font-size: 17px;
+                background-image: linear-gradient(90deg, rgba(225, 225, 225, 0.5), rgba(0, 0, 0, 0));
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                display: flex;
+                align-items: center;
+                float: left;
+            }
+
+            .intro {
+                font: message-box;
+                font-size: 30px;
+                margin: 20px 10px;
+            }
+
+            .card {
+                width: 200px;
+                height: 300px;
+                background-color: antiquewhite;
+                border-radius: 15px;
+                float: left;
+                margin: 40px 10px;
+                opacity: 0;
+                transform: translateY(50px);
+                transition: opacity 1s ease-out, transform 1s ease-out;
+            }
+
+            .c1 {
+                margin-left: 435px;
+            }
+
+            .in-view {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .svg1 {
+                position: absolute;
+                transform: translate(650px, -400px);
+                z-index: 1;
+            }
+            .ran-SVG1 {
+                transform: rotate(30deg);
+            }
+
+            .svg2 {
+                position: absolute;
+                transform: translate(670px, -90px);
+                z-index: 1;
+            }
+            .ran-SVG2 {
+                transform: rotate(-30deg);
+            }
+        </style>    
+    </head>
+    <body>
+        <div class="mainbox">
+            <div class="header"> 
+                <div class="hbox 1" id="h1"><span>Thông tin</span></div>
+                <div class="hbox 2" id="h2"><span>Trợ giúp</span></div>
+                <div class="hbox 3" id="h3"><span>Đăng nhập</span></div>
+                <div class="hbox 4" id="h4"><span>Đăng ký</span></div>
+            </div> 
+
+            <div class="titlebox">
+                <div class="svg svg1"><img src="calculator-svgrepo-com.svg" class="ran-SVG1"></div>
+                <div class="svg svg2"><img src="apple-svgrepo-com.svg" class="ran-SVG2"></div>
+                <div class="open o1" id="o1"></div>
+                <div class="open o2" id="o2"></div>
+                <div class="open o3" id="o3"></div>
+                <div class="open o4" id="o4"></div>
+
+                <section class="eye-catching" id="eye-catching">NAME<br>
+                -- <br>
+                ------
+                </section>
+                <div class="style-block"></div>
+                <div class="bbox b1" id="b1"><span>Không cần tài khoản</span></div>
+                <div class="bbox b2" id="b2"><span>Tài khoản đăng nhập</span></div>
+                <div class="bbox b3" id="b3"><span>Tài khoản Premium</span></div>
+                
+                <div class="wbox">
+                    <div class="arli a1" id="a1"><span>khả dụng với văn bản + hình ảnh</span></div>
+                    <div class="arli a2" id="a2"><span>thêm tính năng xử lý âm thanh</span></div>
+                    <div class="arli a3" id="a3"><span>cộng thêm phân tích video + powerpoint</span></div>
+                </div>
+
+                <div class="usable-bar">
+                    <div class="icon i1" id="i1"></div>
+                    <div class="icon i2" id="i2"></div>
+                    <div class="icon i3" id="i3"></div>
+                    <div class="icon i4" id="i4"></div>
+                    <div class="icon i5" id="i5"></div>
+                </div>
+                <div class="adbox" id="adbox">Sản phẩm của chúng tôi có thể <br>
+                     xử lý thông tin ở các dạng
+                </div>
+                
+            </div>
+            <div class="intro">Về sản phẩm:</div>
+                <section class="card c1" id="card"></section>
+                <section class="card c2" id="card"></section>
+                <section class="card c3" id="card"></section>
+        </div>
+        <script>
+            // Lấy phần tử box1 và box2
+            const b1 = document.getElementById('b1');
+            const b2 = document.getElementById('b2');
+            const b3 = document.getElementById('b3');
+            const i1 = document.getElementById('i1');
+            const i2 = document.getElementById('i2');
+            const i3 = document.getElementById('i3');
+            const i4 = document.getElementById('i4');
+            const i5 = document.getElementById('i5');
+            const a1 = document.getElementById('a1');
+            const a2 = document.getElementById('a2');
+            const a3 = document.getElementById('a3');
+            const ad = document.getElementById('adbox');
+
+            // Handle click on b1
+            b1.addEventListener('click', function() {
+                window.location.href = 'staylogout_AI.html';
+            });
+
+            // Khi hover vào box1, di chuyển box2
+            b1.addEventListener('mouseenter', function() {
+                i1.style.transform = 'translateX(350px)'; // Di chuyển box2 50% sang trái
+                i2.style.transform = 'translateX(350px)'; // Di chuyển box2 50% sang trái    
+            });
+            b1.addEventListener('mouseover', function() {
+                i3.style.visibility = 'hidden';
+                i4.style.visibility = 'hidden';
+                i5.style.visibility = 'hidden';
+                a1.style.visibility = 'visible';
+                ad.style.visibility = 'hidden';
+            });
+
+            // Khi rời khỏi box1, trả box2 về vị trí ban đầu
+            b1.addEventListener('mouseleave', function() {
+                i1.style.transform = 'translateX(625px)';
+                i2.style.transform = 'translateX(625px)';
+                
+            });
+            b1.addEventListener('mouseout', function() {
+                i3.style.visibility = 'visible';
+                i4.style.visibility = 'visible';
+                i5.style.visibility = 'visible';
+                a1.style.visibility = 'hidden';
+                ad.style.visibility = 'visible';
+            });
+
+            //
+            b2.addEventListener('mouseenter', function() {
+                i1.style.transform = 'translateX(680px)'; // Di chuyển box2 50% sang trái
+                i2.style.transform = 'translateX(680px)'; // Di chuyển box2 50% sang trái
+                i3.style.transform = 'translateX(680px)'; // Di chuyển box2 50% sang trái
+                
+            });
+            b2.addEventListener('mouseover', function() {
+                i4.style.visibility = 'hidden';
+                i5.style.visibility = 'hidden';
+                a2.style.visibility = 'visible';
+                ad.style.visibility = 'hidden';
+            });
+
+            // Khi rời khỏi box1, trả box2 về vị trí ban đầu
+            b2.addEventListener('mouseleave', function() {
+                i1.style.transform = 'translateX(625px)';
+                i2.style.transform = 'translateX(625px)';
+                i3.style.transform = 'translateX(625px)';   
+            });
+            b2.addEventListener('mouseout', function() {
+                i4.style.visibility = 'visible';
+                i5.style.visibility = 'visible';
+                a2.style.visibility = 'hidden';
+                ad.style.visibility = 'visible';
+            });
+
+
+            // Khi hover vào box1, di chuyển box2
+            b3.addEventListener('mouseenter', function() {
+                i1.style.transform = 'translateX(980px)'; // Di chuyển box2 50% sang trái
+                i2.style.transform = 'translateX(980px)'; // Di chuyển box2 50% sang trái
+                i3.style.transform = 'translateX(980px)'; // Di chuyển box2 50% sang trái
+                i4.style.transform = 'translateX(980px)'; // Di chuyển box2 50% sang trái
+                i5.style.transform = 'translateX(980px)'; // Di chuyển box2 50% sang trái    
+            });
+            b3.addEventListener('mouseover', function() {
+                a3.style.visibility = 'visible';
+                ad.style.visibility = 'hidden';
+            });
+
+            // Khi rời khỏi box1, trả box2 về vị trí ban đầu
+            b3.addEventListener('mouseleave', function() {
+                i1.style.transform = 'translateX(625px)';
+                i2.style.transform = 'translateX(625px)';
+                i3.style.transform = 'translateX(625px)';
+                i4.style.transform = 'translateX(625px)'; 
+                i5.style.transform = 'translateX(625px)';    
+            });
+            b3.addEventListener('mouseout', function() {
+                a3.style.visibility = 'hidden';
+                ad.style.visibility = 'visible';
+            });
+
+//=========================lấy section làm hiệu ứng xuất hiện========================= 
+            // Lấy tất cả các section
+            const sections = document.querySelectorAll('section');
+
+            // Hàm kiểm tra nếu phần tử nằm trong khung nhìn
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= window.innerHeight && 
+                    rect.bottom >= 0
+                );
+            }
+
+            // Hàm kiểm tra và thêm lớp in-view khi phần tử xuất hiện trong khung nhìn
+            function checkSectionsInView() {
+                sections.forEach(section => {
+                    if (isInViewport(section)) {
+                        section.classList.add('in-view');
+                    }
+                });
+            }
+
+            // Thêm sự kiện scroll để kiểm tra mỗi lần cuộn trang
+            window.addEventListener('scroll', checkSectionsInView);
+
+            // Kiểm tra lần đầu tiên khi tải trang
+            checkSectionsInView();
+
+//=========================hiệu ứng hiện open của header========================= 
+
+            const h1 = document.getElementById('h1');
+            const h2 = document.getElementById('h2');
+            const h3 = document.getElementById('h3');
+            const h4 = document.getElementById('h4');
+            const o1 = document.getElementById('o1');
+            const o2 = document.getElementById('o2');
+            const o3 = document.getElementById('o3');
+            const o4 = document.getElementById('o4');  
+
+            document.getElementById('h1').addEventListener('mouseover', function() {
+                // Lấy vị trí y của box1
+                const h1Y = h1.getBoundingClientRect().left;
+                // Đặt box2 xuất hiện cùng trục y với box1
+                o1.style.left = h1Y/100 + 'px';
+                // Hiển thị box2
+                o1.style.display = 'block';
+            });
+
+            document.getElementById('h1').addEventListener('mouseout', function() {     
+                // Ẩn box2 khi không di chuột vào box1 nữa
+                o1.style.display = 'none';
+            });
+
+            //--------------------------------------------------------------------
+
+            document.getElementById('h2').addEventListener('mouseover', function() {
+                const h2Y = h2.getBoundingClientRect().left;
+                o2.style.left = h2Y + 'px';
+                o2.style.display = 'block';
+            });
+
+            document.getElementById('h2').addEventListener('mouseout', function() {
+                o2.style.display = 'none';
+            });
+
+            //--------------------------------------------------------------------
+
+            document.getElementById('h3').addEventListener('mouseover', function() {
+                const h3Y = h3.getBoundingClientRect().left;
+                o3.style.left = h3Y + 'px';
+                o3.style.display = 'block';
+            });
+
+            document.getElementById('h3').addEventListener('mouseout', function() {
+                o3.style.display = 'none';
+            });
+
+            //--------------------------------------------------------------------
+
+            document.getElementById('h4').addEventListener('mouseover', function() {
+                const h4Y = h4.getBoundingClientRect().left;
+                o4.style.left = h4Y + 'px';
+                o4.style.display = 'block';
+            });
+
+            document.getElementById('h4').addEventListener('mouseout', function() {
+                o4.style.display = 'none';
+            });
+        </script>
+    </body>
+</html>
