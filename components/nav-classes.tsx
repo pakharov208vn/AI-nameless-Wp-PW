@@ -37,44 +37,6 @@ export function NavClasses() {
         },
       ],
     },
-    {
-      title: 'Lớp 10A2',
-      url: '/classes/10a2',
-      icon: Book,
-      items: [
-        {
-          title: 'Danh sách học sinh',
-          url: '#',
-        },
-        {
-          title: 'Đề thi',
-          url: '#',
-        },
-        {
-          title: 'Thông báo',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Lớp 10A3',
-      url: '/classes/10a3',
-      icon: Book,
-      items: [
-        {
-          title: 'Danh sách học sinh',
-          url: '#',
-        },
-        {
-          title: 'Đề thi',
-          url: '#',
-        },
-        {
-          title: 'Thông báo',
-          url: '#',
-        },
-      ],
-    },
   ]
 
   return (

@@ -1,15 +1,25 @@
 'use client'
 
-import { Book } from 'lucide-react'
+import { Image, Pencil, Video } from 'lucide-react'
 
 import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar'
 
 export function NavTools() {
   const classes = [
     {
-      name: 'Tạo đề thi',
-      url: '/exams/create',
-      icon: Book,
+      name: 'Tạo Ảnh minh hoạ',
+      url: '#',
+      icon: Image,
+    },
+    {
+      name: 'Tạo Ví dụ tham khảo',
+      url: '#',
+      icon: Pencil,
+    },
+    {
+      name: 'Tạo Video tóm tắt',
+      url: '#',
+      icon: Video,
     },
   ]
 

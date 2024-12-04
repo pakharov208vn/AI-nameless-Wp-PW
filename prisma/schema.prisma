@@ -17,8 +17,8 @@ model User {
   avatar String
 
   sessions Session[]
-  posts    Post[]
-
+  exams    Exams[]
+  studentAnswers StudentAnswers[]
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("users")
@@ -35,14 +35,48 @@ model Session {
   @@map("sessions")
 }
 
-model Post {
-  id      String @id @default(cuid())
-  content String
 
-  author   User   @relation(fields: [authorId], references: [id])
-  authorId String @map("author_id")
+model Exams {
+  id      String @id @default(cuid())
+  title   String
+
+  timer   Int
+
+  questions Questions[]
+  studentAnswers StudentAnswers[]
+
+  by   User   @relation(fields: [byUserId], references: [id])
+  byUserId String @map("by_user_id")
 
   createdAt DateTime @default(now()) @map("created_at")
 
-  @@map("posts")
+  @@map("exams")
+}
+
+model Questions {
+  id      String @id @default(cuid())
+  text    String
+  barem   String
+
+  exam   Exams   @relation(references: [id], fields: [examId], onDelete: Cascade)
+  examId String @map("exam_id")
+
+  @@map("questions")
+}
+
+model StudentAnswers {
+  id      String @id @default(cuid())
+  answer  String
+  score   Int
+
+  studentName String? @map("student_name")
+  explanation String? @map("explanation")
+
+  student   User   @relation(references: [id], fields: [studentId], onDelete: Cascade)
+  studentId String @map("student_id")
+
+  exam   Exams   @relation(references: [id], fields: [examId], onDelete: Cascade)
+  examId String @map("exam_id")
+
+  @@map("student_answers")
 }

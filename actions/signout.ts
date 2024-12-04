@@ -19,9 +19,9 @@ export const signOut = async () => {
 
     const cookieStore = await cookies()
     cookieStore.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes)
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
-      error: error?.message,
+      error: error instanceof Error ? error.message : 'An unknown error occurred',
     }
   }
 }

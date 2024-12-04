@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Bài thi',
+  title: 'Tạo bài thi',
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
