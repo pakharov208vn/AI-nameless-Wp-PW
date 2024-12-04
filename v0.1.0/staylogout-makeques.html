@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,31 +12,14 @@
         margin: 0;
         padding: 20px;
       }
-
       .main {
         max-width: 800px;
-        margin: 0 auto;
+        margin: auto;
         background: white;
         padding: 30px;
         border-radius: 10px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       }
-
-      .section {
-        margin-bottom: 30px;
-        padding: 20px;
-        border-radius: 8px;
-        background: #fff;
-        border: 1px solid #e1e4e8;
-        position: relative;
-      }
-
-      .section h2 {
-        color: #1a73e8;
-        margin-bottom: 25px;
-        text-align: center;
-      }
-
       .color-choices {
         padding: 12px 20px;
         margin: 10px;
@@ -47,11 +30,9 @@
         text-align: center;
         display: inline-block;
       }
-
       .color-choices:hover {
         transform: translateY(-2px);
       }
-
       .red {
         background-color: #ffcdd2;
       }
@@ -64,7 +45,6 @@
       .yellow {
         background-color: #fff9c4;
       }
-
       textarea {
         width: 100%;
         padding: 12px;
@@ -74,14 +54,12 @@
         margin: 15px 0;
         resize: vertical;
       }
-
       .tools-container {
         display: none;
         gap: 15px;
         margin-top: 20px;
         justify-content: center;
       }
-
       .tool {
         padding: 10px 20px;
         border: none;
@@ -90,35 +68,19 @@
         font-size: 14px;
         transition: background-color 0.3s;
       }
-
       .submitQuestion {
         background-color: #4caf50;
         color: white;
       }
-
       .addQuestion {
         background-color: #2196f3;
         color: white;
       }
-
       .reset-button {
         background-color: #f44336;
         color: white;
         display: none;
       }
-
-      .delete-section {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: #f44336;
-        color: white;
-        padding: 5px 10px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-
       .delete-question {
         background-color: #f44336;
         color: white;
@@ -128,42 +90,6 @@
         cursor: pointer;
         margin-top: 10px;
       }
-
-      .add-section-btn {
-        display: block;
-        margin: 20px auto;
-        padding: 12px 25px;
-        background-color: #1a73e8;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-      }
-
-      .next-section {
-        text-align: center;
-        margin-top: 20px;
-        padding: 20px;
-        background: #e3f2fd;
-        border-radius: 8px;
-      }
-
-      .next-section button {
-        padding: 10px 20px;
-        background-color: #1a73e8;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 14px;
-      }
-
-      .color-choices.active {
-        border: 3px solid #1a73e8;
-        transform: scale(1.05);
-      }
-
       .question {
         margin: 20px 0;
         padding: 15px;
@@ -171,13 +97,11 @@
         border-radius: 8px;
         position: relative;
       }
-
       .answer-option {
         display: flex;
         align-items: center;
         margin: 10px 0;
       }
-
       .answer-input {
         flex: 1;
         padding: 8px;
@@ -189,41 +113,22 @@
   </head>
   <body>
     <div class="main">
-      <div id="section1" class="section">
-        <button class="delete-section" onclick="deleteSection(1)">Xóa phần</button>
-        <h2 style="font-size: 30px">
-          Chọn dạng câu hỏi <br />
-          phần 1
-        </h2>
-        <div id="questionTypeChoices">
-          <div class="color-choices red" data-section="1" data-type="multiple" onclick="handleQuestionTypeClick(this)">Trắc nghiệm 4 câu</div>
-          <div class="color-choices green" data-section="1" data-type="trueFalse" onclick="handleQuestionTypeClick(this)">Trắc nghiệm đúng sai</div>
-          <div class="color-choices blue" data-section="1" data-type="shortAnswer" onclick="handleQuestionTypeClick(this)">Trả lời ngắn</div>
-          <div class="color-choices yellow" data-section="1" data-type="essay" onclick="handleQuestionTypeClick(this)">Tự luận</div>
-        </div>
-        <div class="questionsContainer" id="questionsContainer1"></div>
-        <div class="tools-container" id="toolsContainer1">
-          <button class="tool submitQuestion" id="submitQuestion1" onclick="saveToStorage(1)">Lưu</button>
-          <button class="tool addQuestion" id="addQuestion1" onclick="addQuestion(1)">Thêm câu hỏi</button>
-          <button class="tool reset-button" id="resetButton1" onclick="confirmReset(1)">Reset Choices</button>
-        </div>
+      <h2 style="font-size: 30px; text-align: center">Chọn dạng câu hỏi</h2>
+      <div id="questionTypeChoices">
+        <div class="color-choices red" data-type="multiple" onclick="handleQuestionTypeClick(this)">Trắc nghiệm 4 câu</div>
+        <div class="color-choices green" data-type="trueFalse" onclick="handleQuestionTypeClick(this)">Trắc nghiệm đúng sai</div>
+        <div class="color-choices blue" data-type="shortAnswer" onclick="handleQuestionTypeClick(this)">Trả lời ngắn</div>
+        <div class="color-choices yellow" data-type="essay" onclick="handleQuestionTypeClick(this)">Tự luận</div>
       </div>
-
-      <button class="add-section-btn" onclick="addNewSection()">Thêm phần mới</button>
-
-      <div class="next-section" id="nextSection">
-        <h3>Tiếp tục sang phần tiếp theo?</h3>
-        <button onclick="showNextSection()">Tiếp tục</button>
+      <div id="questionsContainer"></div>
+      <div class="tools-container" id="toolsContainer">
+        <button class="tool submitQuestion" id="submitQuestion" onclick="saveToStorage()">Lưu</button>
+        <button class="tool addQuestion" id="addQuestion" onclick="addQuestion()">Thêm câu hỏi</button>
+        <button class="tool reset-button" id="resetButton" onclick="confirmReset()">Reset Choices</button>
       </div>
     </div>
-
     <div id="displayContainer"></div>
-
     <script>
-      let currentSection = 1
-      const maxSections = 10
-
-      // Khởi tạo suggestions từ localStorage hoặc dùng mảng mặc định
       const suggestions = JSON.parse(localStorage.getItem('suggestions')) || [
         'Tại sao',
         'Cách nào',
@@ -239,93 +144,61 @@
       ]
 
       function handleQuestionTypeClick(element) {
-        const section = element.getAttribute('data-section')
-
-        // Add active class to clicked element
+        document.querySelector('.color-choices.active')?.classList.remove('active')
         element.classList.add('active')
-
-        // Show tools container and its buttons
-        const toolsContainer = document.getElementById(`toolsContainer${section}`)
-
-        // Kiểm tra sự tồn tại của toolsContainer trước khi thay đổi style
-        if (toolsContainer) {
-          toolsContainer.style.display = 'flex'
-          document.getElementById(`resetButton${section}`).style.display = 'block'
-        } else {
-          console.error(`toolsContainer với ID toolsContainer${section} không tồn tại.`)
-        }
-
-        // Save question type to localStorage
-        localStorage.setItem(`questionType_section_${section}`, element.getAttribute('data-type'))
-
-        // Add first question
-        addQuestion(section)
+        const toolsContainer = document.getElementById('toolsContainer')
+        toolsContainer.style.display = 'flex'
+        document.getElementById('resetButton').style.display = 'block'
+        localStorage.setItem('questionType', element.dataset.type)
+        addQuestion()
       }
 
-      function addQuestion(section) {
-        const container = document.getElementById(`questionsContainer${section}`)
-        const activeChoice = document.querySelector(`[data-section="${section}"].active`)
-        const questionType = activeChoice ? activeChoice.dataset.type : null
+      function addQuestion() {
+        const container = document.getElementById('questionsContainer')
+        const questionType = document.querySelector('.color-choices.active')?.dataset.type
+        const questionDiv = document.createElement('div')
+        questionDiv.className = 'question'
+        questionDiv.innerHTML = getQuestionHTML(questionType, container.children.length)
+        container.appendChild(questionDiv)
+      }
 
-        if (questionType === 'multiple') {
-          const questionDiv = document.createElement('div')
-          questionDiv.className = 'question'
-          questionDiv.innerHTML = `
-                    <textarea class="question-input" placeholder="Nhập câu hỏi..."></textarea>
-                    <div class="answer-option">
-                        <input type="radio" name="correct${container.children.length}" value="0">
-                        <input type="text" class="answer-input" placeholder="Đáp án A">
-                    </div>
-                    <div class="answer-option">
-                        <input type="radio" name="correct${container.children.length}" value="1">
-                        <input type="text" class="answer-input" placeholder="Đáp án B">
-                    </div>
-                    <div class="answer-option">
-                        <input type="radio" name="correct${container.children.length}" value="2">
-                        <input type="text" class="answer-input" placeholder="Đáp án C">
-                    </div>
-                    <div class="answer-option">
-                        <input type="radio" name="correct${container.children.length}" value="3">
-                        <input type="text" class="answer-input" placeholder="Đáp án D">
-                    </div>
-                    <button class="delete-question" onclick="deleteQuestion(this)">Xóa câu hỏi</button>
-                `
-          container.appendChild(questionDiv)
-        } else if (questionType === 'trueFalse') {
-          const questionDiv = document.createElement('div')
-          questionDiv.className = 'question'
-          questionDiv.innerHTML = `
-                    <textarea class="question-input" placeholder="Nhập câu hỏi..."></textarea>
-                    <div class="answer-option">
-                        <input type="radio" name="correct${container.children.length}" value="true">
-                        <label style="margin-left: 10px;">Đúng</label>
-                    </div>
-                    <div class="answer-option">
-                        <input type="radio" name="correct${container.children.length}" value="false">
-                        <label style="margin-left: 10px;">Sai</label>
-                    </div>
-                    <button class="delete-question" onclick="deleteQuestion(this)">Xóa câu hỏi</button>
-                `
-          container.appendChild(questionDiv)
-        } else if (questionType === 'shortAnswer') {
-          const questionDiv = document.createElement('div')
-          questionDiv.className = 'question'
-          questionDiv.innerHTML = `
-                    <textarea class="question-input" placeholder="Nhập câu hỏi..."></textarea>
-                    <div class="answer-option">
-                        <textarea class="answer-input" placeholder="Nhập đáp án..."></textarea>
-                    </div>
-                    <button class="delete-question" onclick="deleteQuestion(this)">Xóa câu hỏi</button>
-                `
-          container.appendChild(questionDiv)
-        } else if (questionType === 'essay') {
-          const questionDiv = document.createElement('div')
-          questionDiv.className = 'question'
-          questionDiv.innerHTML = `
-                    <textarea class="question-input" placeholder="Nhập câu hỏi..."></textarea>
-                    <button class="delete-question" onclick="deleteQuestion(this)">Xóa câu hỏi</button>
-                `
-          container.appendChild(questionDiv)
+      function getQuestionHTML(type, index) {
+        const baseHTML = `<textarea class="question-input" placeholder="Nhập câu hỏi..."></textarea>`
+        switch (type) {
+          case 'multiple':
+            return (
+              baseHTML +
+              Array.from(
+                { length: 4 },
+                (_, i) => `
+                        <div class="answer-option">
+                            <input type="radio" name="correct${index}" value="${i}">
+                            <input type="text" class="answer-input" placeholder="Đáp án ${String.fromCharCode(65 + i)}">
+                        </div>`,
+              ).join('') +
+              `<button class="delete-question" onclick="deleteQuestion(this)">Xóa câu hỏi</button>`
+            )
+          case 'trueFalse':
+            return (
+              baseHTML +
+              `
+                        <div class="answer-option">
+                            <input type="radio" name="correct${index}" value="true"><label style="margin-left: 10px;">Đúng</label>
+                        </div>
+                        <div class="answer-option">
+                            <input type="radio" name="correct${index}" value="false"><label style="margin-left: 10px;">Sai</label>
+                        </div>
+                        <button class="delete-question" onclick="deleteQuestion(this)">Xóa câu hỏi</button>`
+            )
+          case 'shortAnswer':
+            return (
+              baseHTML +
+              `<textarea class="answer-input" placeholder="Nhập đáp án..."></textarea><button class="delete-question" onclick="deleteQuestion(this)">Xóa câu hỏi</button>`
+            )
+          case 'essay':
+            return baseHTML + `<button class="delete-question" onclick="deleteQuestion(this)">Xóa câu hỏi</button>`
+          default:
+            return ''
         }
       }
 
@@ -335,94 +208,31 @@
         }
       }
 
-      function deleteSection(section) {
-        if (confirm('Bạn có chắc chắn muốn xóa phần này?')) {
-          document.getElementById(`section${section}`).remove()
-          localStorage.removeItem(`questions_section_${section}`)
-          localStorage.removeItem(`questionType_section_${section}`)
-        }
-      }
-
-      function saveToStorage(section) {
+      function saveToStorage() {
         const roomCode = prompt('Vui lòng nhập mã phòng:')
-        if (!roomCode) {
-          alert('Bạn cần nhập mã phòng để lưu câu hỏi!')
-          return
-        }
-
-        const questions = []
-        const container = document.getElementById(`questionsContainer${section}`)
-
-        // Kiểm tra sự tồn tại của container
-        if (!container) {
-          console.error(`Không tìm thấy phần tử questionsContainer${section}.`)
-          alert(`Không tìm thấy phần tử questionsContainer${section}. Vui lòng kiểm tra lại mã HTML.`)
-          return
-        }
-
-        container.querySelectorAll('.question').forEach((questionDiv) => {
+        if (!roomCode) return alert('Bạn cần nhập mã phòng để lưu câu hỏi!')
+        const questions = Array.from(document.querySelectorAll('.question')).map((questionDiv) => {
           const questionInput = questionDiv.querySelector('.question-input')
-          if (!questionInput) {
-            console.error('Không tìm thấy phần tử câu hỏi.')
-            return
-          }
-
-          const questionData = {
-            question: questionInput.value,
-            type: questionDiv.dataset.type,
-            options: [],
-          }
-
-          // Xử lý cho dạng câu hỏi trắc nghiệm 4 câu
+          const questionData = { question: questionInput.value, type: questionDiv.dataset.type, options: [] }
           if (questionData.type === 'multiple') {
-            questionDiv.querySelectorAll('.answer-option').forEach((optionDiv, index) => {
+            questionData.options = Array.from(questionDiv.querySelectorAll('.answer-option')).map((optionDiv, index) => {
               const answerInput = optionDiv.querySelector('.answer-input')
               const radioInput = optionDiv.querySelector('input[type="radio"]:checked')
-
-              if (answerInput) {
-                const isCorrect = radioInput !== null
-                questionData.options.push({
-                  answer: answerInput.value,
-                  isCorrect: isCorrect,
-                  index: index,
-                })
-              }
+              return { answer: answerInput.value, isCorrect: !!radioInput, index }
             })
-          }
-
-          // Xử lý cho dạng câu hỏi đúng/sai
-          else if (questionData.type === 'trueFalse') {
+          } else if (questionData.type === 'trueFalse') {
             const trueRadio = questionDiv.querySelector('input[type="radio"][value="true"]')
             const falseRadio = questionDiv.querySelector('input[type="radio"][value="false"]')
-
-            if (trueRadio.checked) {
-              questionData.options.push({ answer: 'Đúng', isCorrect: true })
-            } else if (falseRadio.checked) {
-              questionData.options.push({ answer: 'Sai', isCorrect: false })
-            }
-          }
-
-          // Xử lý cho dạng câu hỏi trả lời ngắn
-          else if (questionData.type === 'shortAnswer') {
+            if (trueRadio.checked) questionData.options.push({ answer: 'Đúng', isCorrect: true })
+            else if (falseRadio.checked) questionData.options.push({ answer: 'Sai', isCorrect: false })
+          } else if (questionData.type === 'shortAnswer') {
             const answerInput = questionDiv.querySelector('.answer-input')
-            if (answerInput) {
-              questionData.options.push({ answer: answerInput.value, isCorrect: null })
-            }
+            questionData.options.push({ answer: answerInput.value, isCorrect: null })
           }
-
-          questions.push(questionData)
+          return questionData
         })
-
-        const dataToSave = {
-          roomCode: roomCode,
-          questions: questions,
-        }
-
-        // Lưu dữ liệu vào localStorage
-        localStorage.setItem('questions_data', JSON.stringify(dataToSave))
+        localStorage.setItem('questions_data', JSON.stringify({ roomCode, questions }))
         alert('Đã lưu câu hỏi thành công với mã phòng: ' + roomCode)
-
-        // Gọi hàm hiển thị dữ liệu
         displayStoredData()
       }
 
@@ -431,117 +241,37 @@
         if (storedData) {
           const data = JSON.parse(storedData)
           console.log('Dữ liệu đã lưu:', data)
-
-          // Kiểm tra sự tồn tại của phần tử trước khi thiết lập innerHTML
           const displayContainer = document.getElementById('displayContainer')
-          if (displayContainer) {
-            displayContainer.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`
-          } else {
-            console.error('Phần tử displayContainer không tồn tại.')
-          }
+          displayContainer.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`
         } else {
           console.log('Chưa có dữ liệu nào được lưu.')
         }
       }
 
-      function loadQuestionsFromStorage(section) {
-        const savedData = localStorage.getItem(`questions_section_${section}`)
-        if (savedData) {
-          const data = JSON.parse(savedData)
-          data.questions.forEach((questionData) => {
-            createQuestionElement(section, questionData, questionData.type)
-          })
-        }
-      }
-
-      function addNewSection() {
-        // Xóa toàn bộ dữ liệu trong localStorage
-        localStorage.clear()
-
-        // Tiến hành thêm phần mới
-        if (currentSection < maxSections) {
-          currentSection++
-          const newSection = document.createElement('div')
-          newSection.id = `section${currentSection}`
-          newSection.className = 'section'
-          newSection.innerHTML = `
-            <button class="delete-section" onclick="deleteSection(${currentSection})">Xóa phần</button>
-            <h2 style="font-size: 30px;">Chọn dạng câu hỏi <br> phần ${currentSection}</h2>
-            <div id="questionTypeChoices${currentSection}">
-                <div class="color-choices red" data-section="${currentSection}" data-type="multiple" onclick="handleQuestionTypeClick(this)">Trắc nghiệm 4 câu</div>
-                <div class="color-choices green" data-section="${currentSection}" data-type="trueFalse" onclick="handleQuestionTypeClick(this)">Trắc nghiệm đúng sai</div>
-                <div class="color-choices blue" data-section="${currentSection}" data-type="shortAnswer" onclick="handleQuestionTypeClick(this)">Trả lời ngắn</div>
-                <div class="color-choices yellow" data-section="${currentSection}" data-type="essay" onclick="handleQuestionTypeClick(this)">Tự luận</div>
-            </div>
-            <div class="questionsContainer" id="questionsContainer${currentSection}"></div>
-            <div class="tools-container" id="toolsContainer${currentSection}">
-              <button class="tool submitQuestion" id="submitQuestion${currentSection}" onclick="saveToStorage(${currentSection})">Lưu</button>
-              <button class="tool addQuestion" id="addQuestion${currentSection}" onclick="addQuestion(${currentSection})">Thêm câu hỏi</button>
-              <button class="tool reset-button" id="resetButton${currentSection}" onclick="confirmReset(${currentSection})">Reset Choices</button>
-            </div>
-        `
-
-          // Chèn phần mới vào trước nút "Thêm phần mới"
-          const addSectionBtn = document.querySelector('.add-section-btn')
-          addSectionBtn.parentNode.insertBefore(newSection, addSectionBtn)
-        } else {
-          alert('Đã đạt đến số lượng phần tối đa!')
-        }
-      }
-
-      function confirmReset(section) {
+      function confirmReset() {
         if (confirm('Bạn có chắc chắn muốn reset lựa chọn dạng câu hỏi không?')) {
-          // Show all choices again
-          document.querySelectorAll(`[data-section="${section}"]`).forEach((el) => {
+          document.querySelectorAll('.color-choices').forEach((el) => {
             el.classList.remove('active')
             el.style.display = 'inline-block'
           })
-
-          // Clear questions container
-          const container = document.getElementById(`questionsContainer${section}`)
-          container.innerHTML = ''
-
-          // Hide tools container
-          document.getElementById(`toolsContainer${section}`).style.display = 'none'
-
-          // Clear from localStorage
-          localStorage.removeItem(`questions_section_${section}`)
-          localStorage.removeItem(`questionType_section_${section}`)
+          document.getElementById('questionsContainer').innerHTML = ''
+          document.getElementById('toolsContainer').style.display = 'none'
+          localStorage.removeItem('questions_data')
         }
       }
 
-      // Kiểm tra thông tin lưu trữ trong localStorage
       function checkStoredData() {
-        const studentQuizData = localStorage.getItem('studentQuizData')
-        const questionsData = localStorage.getItem('questions_section_1') // Thay đổi số phần nếu cần
-
-        if (studentQuizData) {
-          console.log('Thông tin bài làm đã lưu:', JSON.parse(studentQuizData))
-        } else {
-          console.log('Chưa có thông tin bài làm nào được lưu.')
-        }
-
-        if (questionsData) {
-          console.log('Thông tin câu hỏi đã lưu:', JSON.parse(questionsData))
-        } else {
-          console.log('Chưa có thông tin câu hỏi nào được lưu.')
-        }
+        console.log(
+          'Thông tin bài làm đã lưu:',
+          JSON.parse(localStorage.getItem('studentQuizData') || 'null') || 'Chưa có thông tin bài làm nào được lưu.',
+        )
+        console.log(
+          'Thông tin câu hỏi đã lưu:',
+          JSON.parse(localStorage.getItem('questions_data') || 'null') || 'Chưa có thông tin câu hỏi nào được lưu.',
+        )
       }
 
-      // Gọi hàm kiểm tra khi trang được tải
-      window.onload = function () {
-        checkStoredData()
-      }
-
-      const savedData = localStorage.getItem('questions_section_1')
-      if (savedData) {
-        console.log('Dữ liệu đã lưu:', JSON.parse(savedData))
-      } else {
-        console.log('Chưa có dữ liệu nào được lưu.')
-      }
-
-      const savedQuestions = JSON.parse(localStorage.getItem('questions'))
-      console.log(savedQuestions)
+      window.onload = checkStoredData
     </script>
   </body>
 </html>
