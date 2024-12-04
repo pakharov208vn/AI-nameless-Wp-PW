@@ -1,5 +1,7 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 import useSWR from 'swr'
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
@@ -18,6 +20,12 @@ export default function Info({ id }: { id: string }) {
         <span className='text-sm text-muted-foreground'>Thời gian</span>
         <span className='text-xl font-semibold'>{data?.exam?.timer / 60} phút</span>
       </div>
+
+      <Link href={`/examination/${id}`}>
+        <Button variant='outline' className='w-fit mt-4'>
+          <span>Lấy đường dẫn đến bài thi</span>
+        </Button>
+      </Link>
 
       <div className='flex flex-col gap-1 mt-4'>
         <span className='text-sm text-muted-foreground'>Câu trả lời ({data?.exam?.studentAnswers.length})</span>
