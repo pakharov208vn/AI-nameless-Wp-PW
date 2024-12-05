@@ -18,14 +18,18 @@ export const POST = async (request: Request) => {
     prompt: `Bạn là giáo viên daỵ Trường Trung Học Phổ Thông. Bạn đang chấm bài của học sinh cho bài thi. Dưới đây là câu hỏi của bạn: ${question}, với barem điểm như sau: ${barem}. Hãy chấm bài, chỉ ra các sai sót (nếu có), hướng dẫn cách học sinh làm bài và cho điểm cho học sinh. Câu trả lời của học sinh là: ${answers}. Bạn hãy cho điểm học sinh theo cú pháp: - SCORE: <điểm>, - EXPLANATION: <giải thích>`,
   })
 
+  console.log(text)
+
   const score = text
     .split('\n')
-    .find((line) => line.startsWith('SCORE:'))
+    .find((line) => line.startsWith('- SCORE:'))
     ?.split(':')[1]
   const explanation = text
     .split('\n')
-    .find((line) => line.startsWith('EXPLANATION:'))
+    .find((line) => line.startsWith('- EXPLANATION:'))
     ?.split(':')[1]
+
+  console.log(score, explanation)
 
   const exam = await db.exams.update({
     where: {
@@ -35,7 +39,7 @@ export const POST = async (request: Request) => {
       studentAnswers: {
         create: answers.map((answer: string) => ({
           answer,
-          score: score || 0,
+          score: Number(score?.split('/')[0].trim()) || 0,
           student: {
             connect: {
               id: studentId,

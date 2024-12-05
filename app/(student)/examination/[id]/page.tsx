@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
 import { useSession } from '@/providers/session-provider'
+import { useExamStore } from '@/stores/exam-store'
 import { CircleHelp, Clock, Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { use, useState } from 'react'
@@ -26,7 +27,7 @@ export default function Page({ params }: { params: { id: string } }) {
   const [answers, setAnswers] = useState<string[]>([])
   const [studentName, setStudentName] = useState('')
 
-  const [isStarted, setIsStarted] = useState(false)
+  const { isStarted, setIsStarted } = useExamStore()
 
   const [loading, setLoading] = useState(false)
 

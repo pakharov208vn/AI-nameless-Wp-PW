@@ -32,7 +32,7 @@ export const Hero = () => {
               <AvatarImage src='https://www.shadcnblocks.com/images/block/avatar-2.webp' alt='placeholder' />
             </Avatar>
             <Avatar className='size-14 border'>
-              <AvatarImage src='https://www.shadcnblocks.com/images/block/avatar-3.webp' alt='placeholder' />
+              <AvatarImage src='https://www.shadcnblocks.com/images/block/avatar-3.weLàm lạibp' alt='placeholder' />
             </Avatar>
             <Avatar className='size-14 border'>
               <AvatarImage src='https://www.shadcnblocks.com/images/block/avatar-4.webp' alt='placeholder' />
